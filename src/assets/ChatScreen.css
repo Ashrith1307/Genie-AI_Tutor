@@ -1,0 +1,138 @@
+/* Main Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(135deg, #e0f7fa, #ffffff);
+  font-family: Arial, sans-serif;
+}
+
+/* Header */
+.chat-header {
+  display: flex;
+  align-items: center;
+  background-color: #4a90e2;
+  color: white;
+  padding: 10px 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.chat-logo {
+  width: 40px;
+  margin-right: 10px;
+}
+
+.chat-header h2 {
+  font-size: 1.4rem;
+  margin: 0;
+}
+
+/* Chat Body */
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Chat Message */
+.chat-message {
+  display: flex;
+  align-items: flex-end;
+  animation: fadeIn 0.5s ease forwards;
+}
+
+.chat-message.ai {
+  justify-content: flex-start;
+}
+
+.chat-message.child {
+  justify-content: flex-end;
+}
+
+/* Chat Avatar */
+.chat-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+/* Chat Bubble */
+.chat-bubble {
+  max-width: 60%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 1rem;
+  margin: 0 8px;
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.chat-message.ai .chat-bubble {
+  background-color: #d0e7ff;
+  color: #000;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-message.child .chat-bubble {
+  background-color: #d4edda;
+  color: #000;
+  border-bottom-right-radius: 4px;
+}
+
+/* Footer */
+.chat-footer {
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+  background: #f8f9fa;
+  border-top: 1px solid #ddd;
+}
+
+/* Microphone Button */
+.mic-button {
+  width: 60px;
+  height: 60px;
+  background-color: #ff7f50;
+  border: none;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.mic-button:hover {
+  transform: scale(1.05);
+}
+
+.mic-button.pulse {
+  animation: pulse 1s infinite;
+}
+
+/* Animations */
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

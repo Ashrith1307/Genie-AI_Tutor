@@ -1,0 +1,133 @@
+/* HomeScreen.css */
+
+/* Container: fill viewport, flex center content */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(
+    135deg,
+    #e0f7fa,
+    #ffffff
+  ); /* playful background */
+  text-align: center;
+  opacity: 0;
+}
+
+/* Fade-in animation */
+.fade-in {
+  animation: fadeInAnimation 1s ease forwards;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Logo styling and container */
+.logo-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 150px;
+}
+
+/* Speech bubble text */
+.hover-text {
+  position: absolute;
+  bottom: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #4a90e2; /* Matches genie tones */
+  color: #fff;
+  padding: 8px 14px;
+  border-radius: 16px;
+  font-size: 1rem;
+  opacity: 0;
+  white-space: nowrap;
+  animation: fadeInMsg 0.3s forwards;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Speech bubble tail */
+.hover-text::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 8px 8px 8px;
+  border-style: solid;
+  border-color: transparent transparent #4a90e2 transparent;
+}
+
+/* Speech bubble fade animation */
+@keyframes fadeInMsg {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -10px);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+}
+
+/* Welcome message */
+.home-container h1 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+/* Button group spacing */
+.button-group {
+  display: flex;
+  gap: 20px;
+}
+
+/* Base style for mode buttons */
+.mode-button {
+  background-color: #ff7f50; /* Coral */
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 1.25rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+}
+
+/* Hover: slightly scale up and brighten */
+.mode-button:hover {
+  transform: scale(1.05);
+  background-color: #ff6b3d;
+}
+
+/* Active: scale down a bit */
+.mode-button:active {
+  background-color: #e65e2d;
+  transform: scale(0.95);
+}
+
+/* Roleplay Mode button colors */
+.mode-button.roleplay {
+  background-color: #6a5acd; /* Deep Purple */
+}
+
+.mode-button.roleplay:hover {
+  background-color: #5a4dbb;
+}
+
+.mode-button.roleplay:active {
+  background-color: #4b3fa5;
+}
