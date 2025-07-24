@@ -2,22 +2,61 @@ import React, { useState } from "react";
 import "./ChatScreen.css";
 
 function ChatScreen() {
+  const [messages, setMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
 
-  const messages = [
-    { id: 1, sender: "ai", text: "Hello! I am Genie, your English buddy." },
-    { id: 2, sender: "child", text: "Hi Genie! Can we talk about animals?" },
-    { id: 3, sender: "ai", text: "Sure! What is your favorite animal?" },
-    { id: 4, sender: "child", text: "I love elephants!" },
-  ];
+  // 1. Set up SpeechRecognition
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
 
-  const toggleListening = () => setIsListening(!isListening);
+  const recognition = new SpeechRecognition();
+  recognition.lang = "en-US";
+  recognition.interimResults = false;
+  recognition.maxAlternatives = 1;
+
+  const startListening = () => {
+    setIsListening(true);
+    recognition.start();
+    console.log("Listening...");
+  };
+  recognition.onresult = (event) => {
+    const transcript = event.results[0][0].transcript;
+
+    // Add child message
+    const newChildMessage = {
+      id: Date.now(),
+      sender: "child",
+      text: transcript,
+    };
+
+    setMessages((prev) => [...prev, newChildMessage]);
+
+    // Auto Genie reply after 1 second
+    setTimeout(() => {
+      const genieReply = {
+        id: Date.now() + 1,
+        sender: "ai",
+        text: "That's interesting! Tell me more 😊",
+      };
+      setMessages((prev) => [...prev, genieReply]);
+    }, 1000);
+  };
+
+  recognition.onerror = (event) => {
+    console.error("Speech recognition error:", event.error);
+  };
+
+  // const messages = [
+  //   { id: 1, sender: "ai", text: "Hello! I am Genie, your English buddy." },
+  //   { id: 2, sender: "child", text: "Hi Genie! Can we talk about animals?" },
+  //   { id: 3, sender: "ai", text: "Sure! What is your favorite animal?" },
+  //   { id: 4, sender: "child", text: "I love elephants!" },
+  // ];
 
   return (
     <div className="chat-container">
       {/* Header */}
       <header className="chat-header">
-        <img src="public/logo1.png" alt="Genie logo" className="chat-logo" />
         <h2>Free Chat Mode</h2>
       </header>
 
@@ -48,7 +87,7 @@ function ChatScreen() {
       <footer className="chat-footer">
         <button
           className={`mic-button ${isListening ? "pulse" : ""}`}
-          onClick={toggleListening}
+          onClick={startListening}
           aria-label="Microphone"
         >
           🎤
