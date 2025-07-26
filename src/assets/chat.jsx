@@ -1,79 +1,84 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { getGenieReply } from "../Genie"; // 🔁 Adjust the path if needed
 import "./ChatScreen.css";
 
 function ChatScreen() {
   const [messages, setMessages] = useState([]);
   const [isListening, setIsListening] = useState(false);
+  const [recognition, setRecognition] = useState(null);
 
-  // 1. Set up SpeechRecognition
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  // Initialize SpeechRecognition on mount
+  useEffect(() => {
+    const SpeechRecognition =
+      window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) {
+      alert("Speech recognition not supported in your browser.");
+      return;
+    }
 
-  const recognition = new SpeechRecognition();
-  recognition.lang = "en-US";
-  recognition.interimResults = false;
-  recognition.maxAlternatives = 1;
+    const recog = new SpeechRecognition();
+    recog.lang = "en-US";
+    recog.interimResults = false;
+    recog.maxAlternatives = 1;
 
+    setRecognition(recog);
+  }, []);
+
+  // Handle speech-to-text
   const startListening = () => {
+    if (!recognition) return;
     setIsListening(true);
     recognition.start();
-    console.log("Listening...");
-  };
-  recognition.onresult = (event) => {
-    const transcript = event.results[0][0].transcript;
 
-    // Add child message
-    const newChildMessage = {
-      id: Date.now(),
-      sender: "child",
-      text: transcript,
-    };
+    recognition.onresult = async (event) => {
+      setIsListening(false);
+      const transcript = event.results[0][0].transcript;
+      console.log("🎙️ You said:", transcript);
 
-    setMessages((prev) => [...prev, newChildMessage]);
+      const userMsg = {
+        id: Date.now(),
+        sender: "child",
+        text: transcript,
+      };
+      setMessages((prev) => [...prev, userMsg]);
 
-    // Auto Genie reply after 1 second
-    setTimeout(() => {
-      const genieReply = {
+      // Get Genie's reply from Hugging Face
+      const reply = await getGenieReply(transcript);
+
+      const aiMsg = {
         id: Date.now() + 1,
         sender: "ai",
-        text: "That's interesting! Tell me more 😊",
+        text: reply,
       };
-      setMessages((prev) => [...prev, genieReply]);
-    }, 1000);
-  };
+      setMessages((prev) => [...prev, aiMsg]);
+    };
 
-  recognition.onerror = (event) => {
-    console.error("Speech recognition error:", event.error);
+    recognition.onerror = (event) => {
+      console.error("🎤 Speech recognition error:", event.error);
+      setIsListening(false);
+    };
   };
-
-  // const messages = [
-  //   { id: 1, sender: "ai", text: "Hello! I am Genie, your English buddy." },
-  //   { id: 2, sender: "child", text: "Hi Genie! Can we talk about animals?" },
-  //   { id: 3, sender: "ai", text: "Sure! What is your favorite animal?" },
-  //   { id: 4, sender: "child", text: "I love elephants!" },
-  // ];
 
   return (
     <div className="chat-container">
+      {/* Header */}
       <header className="chat-header">
+        <img src="/logo1.png" alt="Genie logo" className="chat-logo" />
         <h2>Free Chat Mode</h2>
       </header>
 
+      {/* Chat Messages */}
       <main className="chat-body">
         {messages.map((msg) => (
           <div key={msg.id} className={`chat-message ${msg.sender}`}>
             {msg.sender === "ai" && (
-              <img
-                src="public/logo1.png"
-                alt="AI avatar"
-                className="chat-avatar"
-              />
+              <img src="/logo1.png" alt="Genie" className="chat-avatar" />
             )}
             <div className="chat-bubble">{msg.text}</div>
             {msg.sender === "child" && (
               <img
                 src="https://i.pravatar.cc/40?img=11"
-                alt="Child avatar"
+                alt="Child"
                 className="chat-avatar"
               />
             )}
@@ -81,14 +86,13 @@ function ChatScreen() {
         ))}
       </main>
 
-      {/* Microphone Button */}
+      {/* Footer - Microphone */}
       <footer className="chat-footer">
         <button
           className={`mic-button ${isListening ? "pulse" : ""}`}
           onClick={startListening}
-          aria-label="Microphone"
         >
-          🎤
+          🎤 Speak
         </button>
       </footer>
     </div>
