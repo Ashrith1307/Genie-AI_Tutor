@@ -55,12 +55,10 @@ function ChatScreen() {
 
   return (
     <div className="chat-container">
-      {/* Header */}
       <header className="chat-header">
         <h2>Free Chat Mode</h2>
       </header>
 
-      {/* Chat Area */}
       <main className="chat-body">
         {messages.map((msg) => (
           <div key={msg.id} className={`chat-message ${msg.sender}`}>
