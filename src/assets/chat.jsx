@@ -1,4 +1,3 @@
-// ChatScreen.jsx - CORRECTED version with proper function structure
 import React, { useState, useEffect, useRef } from "react";
 import "./ChatScreen.css";
 
