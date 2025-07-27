@@ -31,6 +31,7 @@ function HomeScreen() {
           className="mode-button roleplay"
           onMouseEnter={() => setHoverMessage("Which Role?")}
           onMouseLeave={() => setHoverMessage("")}
+          onClick={() => navigate("/roleplay")} // Redirects to RoleplayScreen
         >
           Roleplay Mode
         </button>

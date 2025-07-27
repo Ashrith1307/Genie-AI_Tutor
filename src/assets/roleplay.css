@@ -1,0 +1,77 @@
+/* RoleplayScreen.css */
+.roleplay-select-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.roleplay-select-container h3 {
+  font-size: 1.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.roleplay-select {
+  font-size: 1.1rem;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+.roleplay-start-btn {
+  margin-top: 15px;
+  padding: 10px 20px;
+  font-size: 1.1rem;
+  background-color: #6a5acd;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.roleplay-start-btn:hover {
+  transform: scale(1.05);
+}
+
+.roleplay-start-btn:active {
+  transform: scale(0.95);
+}
+
+.roleplay-start-btn:disabled {
+  background-color: #aaa;
+  cursor: not-allowed;
+}
+
+.back-button {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.speaking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+  color: #fff;
+}
+
+.speaking-icon {
+  font-size: 1.2rem;
+}
+
+.stop-speaking-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 2px 6px;
+  margin-left: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
