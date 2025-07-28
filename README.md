@@ -1,12 +1,36 @@
-# React + Vite
+# 🧠 SpeakGenie – AI Voice Tutor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SpeakGenie is a web-based AI voice tutor built for children aged 6 to 16. It helps them improve English speaking skills through:
 
-Currently, two official plugins are available:
+- 🎤 Free-flow Voice Chat
+- 🎭 Interactive Roleplay Mode
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Voice input using Speech-to-Text (STT)
+- AI responses using ChatGPT
+- Text-to-Speech (TTS) replies
+- Roleplay scenarios like “At School”, “At the Store”, etc.
+
+Tech Stack
+
+- React.js (Frontend)
+- React Router (Navigation)
+- GPT API (Sarvam-m model)
+- Google STT (Speech-to-Text)
+- Google TTS (Voice Output)
+
+📁 Project Structure
+
+```
+├── public/
+├── src/
+│   ├── App.jsx        # Main router
+│   ├── main.jsx       # React entry point
+│   └── assets/
+│       ├── home.jsx
+│       ├── chat.jsx
+│       └── Roleplay.jsx
+```
