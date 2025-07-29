@@ -10,7 +10,7 @@ SpeakGenie is a web-based AI voice tutor built for children aged 6 to 16. It hel
 ## 🚀 Features
 
 - Voice input using Speech-to-Text (STT)
-- AI responses using ChatGPT
+- AI responses using Google hugging face model
 - Text-to-Speech (TTS) replies
 - Roleplay scenarios like “At School”, “At the Store”, etc.
 
@@ -18,7 +18,7 @@ Tech Stack
 
 - React.js (Frontend)
 - React Router (Navigation)
-- GPT API (Sarvam-m model)
+- GPT API (Google model)
 - Google STT (Speech-to-Text)
 - Google TTS (Voice Output)
 
